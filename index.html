@@ -2,10 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>VPN</title>
 
@@ -19,9 +16,8 @@
         body {
             margin: 0;
             min-height: 100vh;
-
+            padding: 18px;
             font-family: Arial, sans-serif;
-
             color: white;
 
             background:
@@ -31,8 +27,6 @@
                     #071015 45%,
                     #000000 100%
                 );
-
-            padding: 18px;
         }
 
         .container {
@@ -42,15 +36,14 @@
 
         .logo {
             text-align: center;
-            font-size: 38px;
-            margin-top: 10px;
-            margin-bottom: 8px;
+            font-size: 50px;
+            margin-top: 15px;
         }
 
         h1 {
             text-align: center;
             font-size: 24px;
-            margin: 5px 0 15px;
+            margin: 8px 0 12px;
         }
 
         .description {
@@ -60,29 +53,28 @@
             margin-bottom: 20px;
         }
 
-        .features {
-            background: rgba(255, 255, 255, 0.06);
+        .card {
+            background: rgba(255,255,255,0.07);
             border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 15px;
+            padding: 18px;
+            margin-bottom: 14px;
         }
 
-        .features-title {
+        .title {
             font-size: 18px;
             font-weight: bold;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .feature {
-            margin: 9px 0;
+            padding: 7px 0;
             color: #eeeeee;
         }
 
         .button {
             width: 100%;
-            border: none;
-            border-radius: 12px;
-
+            border: 0;
+            border-radius: 13px;
             padding: 16px;
             margin-top: 10px;
 
@@ -91,24 +83,56 @@
             font-weight: bold;
 
             cursor: pointer;
-
-            transition: 0.15s;
-        }
-
-        .button:active {
-            transform: scale(0.98);
         }
 
         .green {
-            background: #2f7d2f;
+            background: #2f8f3a;
         }
 
         .blue {
             background: #27718a;
         }
 
-        .dark {
-            background: rgba(255, 255, 255, 0.08);
+        .button:active {
+            transform: scale(0.98);
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 15px;
+            color: #8cff98;
+            display: none;
+        }
+
+        .account {
+            display: none;
+        }
+
+        .account-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .account-row:last-child {
+            border-bottom: none;
+        }
+
+        .locations {
+            display: none;
+        }
+
+        .location {
+            background: rgba(255,255,255,0.07);
+            padding: 14px;
+            border-radius: 12px;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        .location:hover {
+            background: rgba(255,255,255,0.12);
         }
 
         .two-buttons {
@@ -119,29 +143,27 @@
         }
 
         .small-button {
-            border: none;
-            background: transparent;
-            color: white;
-
+            border: 0;
+            border-radius: 12px;
             padding: 14px 5px;
+
+            color: white;
+            background: rgba(255,255,255,0.07);
 
             font-size: 14px;
             cursor: pointer;
         }
 
         .links {
-            margin-top: 12px;
+            margin-top: 15px;
             text-align: center;
         }
 
         .link {
             display: block;
-
             color: white;
             text-decoration: none;
-
-            padding: 12px 5px;
-
+            padding: 10px;
             font-size: 14px;
         }
 
@@ -158,13 +180,9 @@
 
 <div class="container">
 
-    <div class="logo">
-        🛡️
-    </div>
+    <div class="logo">🛡️</div>
 
-    <h1>
-        Быстрый VPN в Telegram
-    </h1>
+    <h1>Быстрый VPN в Telegram</h1>
 
     <div class="description">
         Привет! 👋<br>
@@ -172,107 +190,110 @@
         всё в одном месте.
     </div>
 
+    <div class="card">
 
-    <div class="features">
+        <div class="title">✨ Что доступно:</div>
 
-        <div class="features-title">
-            ✨ Что доступно:
+        <div class="feature">⚡ Подключение в один клик</div>
+        <div class="feature">🎁 Пробный период — 31 день, 100 ГБ</div>
+        <div class="feature">🌍 Выбор локации</div>
+        <div class="feature">💳 Оплата картой и СБП</div>
+
+    </div>
+
+    <button class="button green" onclick="openVPN()">
+        🟢 Открыть VPN
+    </button>
+
+    <div id="status" class="status">
+        🟢 VPN подключён
+    </div>
+
+    <button class="button blue" onclick="setupVPN()">
+        🔧 Настроить VPN
+    </button>
+
+    <div id="locations" class="card locations">
+
+        <div class="title">🌍 Выберите локацию</div>
+
+        <div class="location" onclick="selectLocation('🇳🇱 Нидерланды')">
+            🇳🇱 Нидерланды
         </div>
 
-        <div class="feature">
-            ⚡ Подключение в один клик
+        <div class="location" onclick="selectLocation('🇩🇪 Германия')">
+            🇩🇪 Германия
         </div>
 
-        <div class="feature">
-            🎁 Пробный период — 31 день, 100 ГБ
-        </div>
-
-        <div class="feature">
-            🌍 Выбор локации
-        </div>
-
-        <div class="feature">
-            💳 Оплата картой и СБП
+        <div class="location" onclick="selectLocation('🇫🇮 Финляндия')">
+            🇫🇮 Финляндия
         </div>
 
     </div>
 
-
-    <button
-        class="button green"
-        onclick="openVPN()"
-    >
-        🟢 Открыть VPN
-    </button>
-
-
-    <button
-        class="button blue"
-        onclick="setupVPN()"
-    >
-        🔧 Настроить VPN
-    </button>
-
-
-    <button
-        class="button blue"
-        onclick="account()"
-    >
+    <button class="button blue" onclick="account()">
         🔒 Личный кабинет
     </button>
 
+    <div id="account" class="card account">
+
+        <div class="title">🔒 Личный кабинет</div>
+
+        <div class="account-row">
+            <span>📦 Тариф</span>
+            <span>Пробный</span>
+        </div>
+
+        <div class="account-row">
+            <span>💾 Трафик</span>
+            <span>100 ГБ</span>
+        </div>
+
+        <div class="account-row">
+            <span>📅 Срок</span>
+            <span>31 день</span>
+        </div>
+
+        <div class="account-row">
+            <span>💰 Баланс</span>
+            <span>0 ₽</span>
+        </div>
+
+    </div>
 
     <div class="two-buttons">
 
-        <button
-            class="small-button"
-            onclick="referral()"
-        >
+        <button class="small-button" onclick="referral()">
             👥 Реф. программа
         </button>
 
-        <button
-            class="small-button"
-            onclick="promo()"
-        >
+        <button class="small-button" onclick="promo()">
             🔑 Промокод
         </button>
 
     </div>
 
-
     <div class="links">
 
-        <a
-            class="link"
-            href="https://example.com"
-        >
+        <a class="link" href="https://example.com">
             🌐 Открыть сайт
         </a>
 
-        <a
-            class="link"
-            href="https://example.com/privacy"
-        >
+        <a class="link" href="https://example.com/privacy">
             ⓘ Политика конфиденциальности
         </a>
 
-        <a
-            class="link"
-            href="https://example.com/terms"
-        >
+        <a class="link" href="https://example.com/terms">
             📄 Пользовательское соглашение
         </a>
 
     </div>
-
 
     <div class="footer">
         © 2026 VPN
     </div>
 
 </div>
-
 
 <script>
 
@@ -284,46 +305,70 @@
 
     function openVPN() {
 
-        tg.showAlert(
-            "🟢 Подключение к VPN..."
-        );
+        document.getElementById("status").style.display = "block";
 
+        tg.showAlert(
+            "🟢 VPN подключён!\n\n"
+            + "Локация: 🇳🇱 Нидерланды\n"
+            + "Трафик: 100 ГБ"
+        );
     }
 
 
     function setupVPN() {
 
-        tg.showAlert(
-            "🔧 Здесь будет настройка VPN."
-        );
+        const locations =
+            document.getElementById("locations");
 
+        locations.style.display =
+            locations.style.display === "block"
+            ? "none"
+            : "block";
+    }
+
+
+    function selectLocation(location) {
+
+        tg.showAlert(
+            "🌍 Выбрана локация:\n\n" + location
+        );
     }
 
 
     function account() {
 
-        tg.showAlert(
-            "🔒 Личный кабинет"
-        );
+        const account =
+            document.getElementById("account");
 
+        account.style.display =
+            account.style.display === "block"
+            ? "none"
+            : "block";
     }
 
 
     function referral() {
 
         tg.showAlert(
-            "👥 Ваша реферальная программа"
+            "👥 Реферальная программа\n\n"
+            + "Приглашай друзей и получай бонусы."
         );
-
     }
 
 
     function promo() {
 
-        tg.showAlert(
-            "🔑 Здесь можно будет ввести промокод."
-        );
-
+        tg.showPopup({
+            title: "🔑 Промокод",
+            message: "Введите промокод в следующей версии приложения.",
+            buttons: [
+                {
+                    id: "ok",
+                    type: "ok",
+                    text: "Понятно"
+                }
+            ]
+        });
     }
 
 </script>
