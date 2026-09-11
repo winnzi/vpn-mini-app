@@ -113,10 +113,16 @@
             justify-content: space-between;
             padding: 9px 0;
             border-bottom: 1px solid rgba(255,255,255,0.08);
+            gap: 10px;
         }
 
         .account-row:last-child {
             border-bottom: none;
+        }
+
+        .account-value {
+            text-align: right;
+            font-weight: bold;
         }
 
         .locations {
@@ -173,6 +179,18 @@
             font-size: 12px;
             margin-top: 20px;
         }
+
+        .loading {
+            text-align: center;
+            color: #aaa;
+            padding: 15px 0;
+        }
+
+        .error {
+            color: #ff8a8a;
+            text-align: center;
+            padding: 10px 0;
+        }
     </style>
 </head>
 
@@ -184,7 +202,7 @@
 
     <h1>Быстрый VPN в Telegram</h1>
 
-    <div class="description">
+    <div class="description" id="greeting">
         Привет! 👋<br>
         Подписка, баланс и настройка VPN —
         всё в одном месте.
@@ -239,24 +257,10 @@
 
         <div class="title">🔒 Личный кабинет</div>
 
-        <div class="account-row">
-            <span>📦 Тариф</span>
-            <span>Пробный</span>
-        </div>
-
-        <div class="account-row">
-            <span>💾 Трафик</span>
-            <span>100 ГБ</span>
-        </div>
-
-        <div class="account-row">
-            <span>📅 Срок</span>
-            <span>31 день</span>
-        </div>
-
-        <div class="account-row">
-            <span>💰 Баланс</span>
-            <span>0 ₽</span>
+        <div id="accountContent">
+            <div class="loading">
+                Загрузка данных...
+            </div>
         </div>
 
     </div>
@@ -295,7 +299,12 @@
 
 </div>
 
+
 <script>
+
+    // =========================
+    // TELEGRAM
+    // =========================
 
     const tg = window.Telegram.WebApp;
 
@@ -303,75 +312,52 @@
     tg.expand();
 
 
-    function openVPN() {
+    // =========================
+    // API
+    // =========================
 
-        document.getElementById("status").style.display = "block";
+    const API_URL =
+        "https://oxygen-reattach-opposing.ngrok-free.dev";
 
-        tg.showAlert(
-            "🟢 VPN подключён!\n\n"
-            + "Локация: 🇳🇱 Нидерланды\n"
-            + "Трафик: 100 ГБ"
-        );
+
+    // =========================
+    // ПРИВЕТСТВИЕ
+    // =========================
+
+    function setGreeting() {
+
+        const user = tg.initDataUnsafe?.user;
+
+        if (!user) {
+            return;
+        }
+
+        const name =
+            user.first_name || "друг";
+
+        document.getElementById("greeting").innerHTML =
+            "Привет, " + escapeHtml(name) + "! 👋<br>" +
+            "Подписка, баланс и настройка VPN —<br>" +
+            "всё в одном месте.";
     }
 
 
-    function setupVPN() {
+    // =========================
+    // ЗАЩИТА ТЕКСТА
+    // =========================
 
-        const locations =
-            document.getElementById("locations");
+    function escapeHtml(text) {
 
-        locations.style.display =
-            locations.style.display === "block"
-            ? "none"
-            : "block";
+        const div = document.createElement("div");
+
+        div.textContent = text;
+
+        return div.innerHTML;
     }
 
 
-    function selectLocation(location) {
+    // =========================
+    // ОТКРЫТЬ VPN
+    // =========================
 
-        tg.showAlert(
-            "🌍 Выбрана локация:\n\n" + location
-        );
-    }
-
-
-    function account() {
-
-        const account =
-            document.getElementById("account");
-
-        account.style.display =
-            account.style.display === "block"
-            ? "none"
-            : "block";
-    }
-
-
-    function referral() {
-
-        tg.showAlert(
-            "👥 Реферальная программа\n\n"
-            + "Приглашай друзей и получай бонусы."
-        );
-    }
-
-
-    function promo() {
-
-        tg.showPopup({
-            title: "🔑 Промокод",
-            message: "Введите промокод в следующей версии приложения.",
-            buttons: [
-                {
-                    id: "ok",
-                    type: "ok",
-                    text: "Понятно"
-                }
-            ]
-        });
-    }
-
-</script>
-
-</body>
-</html>
+    function openVPN()
