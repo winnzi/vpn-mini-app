@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    >
+
+    <title>VPN</title>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #173d45 0%,
+                    #071015 45%,
+                    #000000 100%
+                );
+
+            padding: 18px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 38px;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin: 5px 0 15px;
+        }
+
+        .description {
+            text-align: center;
+            color: #d0d0d0;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 15px;
+        }
+
+        .features-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .feature {
+            margin: 9px 0;
+            color: #eeeeee;
+        }
+
+        .button {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+
+            padding: 16px;
+            margin-top: 10px;
+
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.15s;
+        }
+
+        .button:active {
+            transform: scale(0.98);
+        }
+
+        .green {
+            background: #2f7d2f;
+        }
+
+        .blue {
+            background: #27718a;
+        }
+
+        .dark {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .two-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .small-button {
+            border: none;
+            background: transparent;
+            color: white;
+
+            padding: 14px 5px;
+
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .links {
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .link {
+            display: block;
+
+            color: white;
+            text-decoration: none;
+
+            padding: 12px 5px;
+
+            font-size: 14px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        🛡️
+    </div>
+
+    <h1>
+        Быстрый VPN в Telegram
+    </h1>
+
+    <div class="description">
+        Привет! 👋<br>
+        Подписка, баланс и настройка VPN —
+        всё в одном месте.
+    </div>
+
+
+    <div class="features">
+
+        <div class="features-title">
+            ✨ Что доступно:
+        </div>
+
+        <div class="feature">
+            ⚡ Подключение в один клик
+        </div>
+
+        <div class="feature">
+            🎁 Пробный период — 31 день, 100 ГБ
+        </div>
+
+        <div class="feature">
+            🌍 Выбор локации
+        </div>
+
+        <div class="feature">
+            💳 Оплата картой и СБП
+        </div>
+
+    </div>
+
+
+    <button
+        class="button green"
+        onclick="openVPN()"
+    >
+        🟢 Открыть VPN
+    </button>
+
+
+    <button
+        class="button blue"
+        onclick="setupVPN()"
+    >
+        🔧 Настроить VPN
+    </button>
+
+
+    <button
+        class="button blue"
+        onclick="account()"
+    >
+        🔒 Личный кабинет
+    </button>
+
+
+    <div class="two-buttons">
+
+        <button
+            class="small-button"
+            onclick="referral()"
+        >
+            👥 Реф. программа
+        </button>
+
+        <button
+            class="small-button"
+            onclick="promo()"
+        >
+            🔑 Промокод
+        </button>
+
+    </div>
+
+
+    <div class="links">
+
+        <a
+            class="link"
+            href="https://example.com"
+        >
+            🌐 Открыть сайт
+        </a>
+
+        <a
+            class="link"
+            href="https://example.com/privacy"
+        >
+            ⓘ Политика конфиденциальности
+        </a>
+
+        <a
+            class="link"
+            href="https://example.com/terms"
+        >
+            📄 Пользовательское соглашение
+        </a>
+
+    </div>
+
+
+    <div class="footer">
+        © 2026 VPN
+    </div>
+
+</div>
+
+
+<script>
+
+    const tg = window.Telegram.WebApp;
+
+    tg.ready();
+    tg.expand();
+
+
+    function openVPN() {
+
+        tg.showAlert(
+            "🟢 Подключение к VPN..."
+        );
+
+    }
+
+
+    function setupVPN() {
+
+        tg.showAlert(
+            "🔧 Здесь будет настройка VPN."
+        );
+
+    }
+
+
+    function account() {
+
+        tg.showAlert(
+            "🔒 Личный кабинет"
+        );
+
+    }
+
+
+    function referral() {
+
+        tg.showAlert(
+            "👥 Ваша реферальная программа"
+        );
+
+    }
+
+
+    function promo() {
+
+        tg.showAlert(
+            "🔑 Здесь можно будет ввести промокод."
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
